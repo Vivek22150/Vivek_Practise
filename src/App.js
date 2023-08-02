@@ -33,10 +33,10 @@ function App() {
     // </>
 <>
 <Add/>
-    <div className='App'>
+    {/* <div className='App'>
     
      <Shop/>
-    </div>
+    </div> */}
     </>
   );
 }
