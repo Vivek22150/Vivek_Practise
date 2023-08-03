@@ -22,6 +22,7 @@ export default function Shop() {
        Updated Balance
         <button className='btn btn-primary mx-2' onClick={()=>{action.depositeMoney(100)}}>+</button>
        </div>
+       
     )
 
 }

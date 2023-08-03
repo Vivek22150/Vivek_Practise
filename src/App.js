@@ -1,11 +1,12 @@
 
 import './App.css';
-import Home from './components/Home';
+// import Home from './components/Home';
 import Add from './components/Add';
-import {BrowserRouter as Router,Route,Routes} from 'react-router-dom';
+// import {BrowserRouter as Router,Route,Routes} from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import {incNumber,decNumber} from './actions/index';
+// import {incNumber,decNumber} from './actions/index';
 import Shop from './components/Shop';
+import TextForm from './components/TextForm';
 
 
 function App() {
@@ -32,11 +33,12 @@ function App() {
     // </div>
     // </>
 <>
+{/* Redux Example
 <Add/>
-    {/* <div className='App'>
-    
+    <div className='App'>
      <Shop/>
     </div> */}
+     <TextForm title="TextUtils"/>
     </>
   );
 }

@@ -33,7 +33,7 @@ export default function Add() {
     </div>
   </div>
 </nav>
-<nav className="navbar navbar-inverse">
+{/* <nav className="navbar navbar-inverse">
   <div className="container-fluid">
     <div className="navbar-header">
       <button type="button" className="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -84,7 +84,7 @@ export default function Add() {
 
 <footer className="container-fluid text-center">
   <p>Footer Text</p>
-</footer>
+</footer> */}
 
         </Fragment>
     )
