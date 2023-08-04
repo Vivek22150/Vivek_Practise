@@ -11,7 +11,7 @@ import TextForm from './components/TextForm';
 
 function App() {
   const myState = useSelector((state) => state.changeTheNUmber);
-  const dispatch =useDispatch();
+  const dispatch = useDispatch();
   return (
     // <div className="App">
     //  <Router>
@@ -32,13 +32,17 @@ function App() {
     //   </div>
     // </div>
     // </>
-<>
-{/* Redux Example
+    <>
+      {/* Redux Example
 <Add/>
     <div className='App'>
      <Shop/>
     </div> */}
-     <TextForm title="TextUtils"/>
+
+      {/* Props Example
+     <TextForm title="TextUtils"/> */}
+
+     
     </>
   );
 }
