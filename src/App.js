@@ -2,11 +2,17 @@
 import './App.css';
 // import Home from './components/Home';
 import Add from './components/Add';
-// import {BrowserRouter as Router,Route,Routes} from 'react-router-dom';
+import ReactDOM from "react-dom/client";
+
+import React, { Component } from 'react';
+import { BrowserRouter as Router,Routes, Route, Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 // import {incNumber,decNumber} from './actions/index';
 import Shop from './components/Shop';
 import TextForm from './components/TextForm';
+import TableData from './components/tableData';
+import Contact from './components/Contact';
+
 
 
 function App() {
@@ -33,17 +39,19 @@ function App() {
     // </div>
     // </>
     <>
-      {/* Redux Example
-<Add/>
-    <div className='App'>
-     <Shop/>
-    </div> */}
+ <Router>
+      <Routes>
+        <Route exact path="/" element={<TableData/>}> </Route>
+          <Route exact path="/blog" element={<Contact/>} />
+          
+       
+      </Routes>
+    </Router>
 
-      {/* Props Example
-     <TextForm title="TextUtils"/> */}
 
-     
+   
     </>
+
   );
 }
 
