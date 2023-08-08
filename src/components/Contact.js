@@ -1,18 +1,22 @@
 import React, { Fragment, useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import "bootstrap/dist/css/bootstrap.min.css";
-import clsx from 'clsx';
 import * as Yup from 'yup';
 import axios from 'axios';
+import './Contact.css';
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const Contact = () => {
+  const { id } = useParams();
+  const location = useLocation();
+  const isEdit = id && location.state && location.state.contactData;
+
   const initialValues = {
-    fullName: '',
-    mobileNo: '',
-    email: '',
-    subject: '',
-    message: '',
+    fullName: isEdit ? location.state.contactData.fullName : '',
+    mobileNo: isEdit ? location.state.contactData.mobileNo : '',
+    email: isEdit ? location.state.contactData.email : '',
+    subject: isEdit ? location.state.contactData.subject : '',
+    message: isEdit ? location.state.contactData.message : '',
   };
 
   const validationSchema = Yup.object().shape({
@@ -22,13 +26,21 @@ const Contact = () => {
     subject: Yup.string().required('Subject is required'),
     message: Yup.string().required('Message is required'),
   });
+
   const navigate = useNavigate();
+
   const handleSubmit = async (values, { setSubmitting, resetForm }) => {
     try {
-      const response = await axios.post('http://localhost:5555/api/contactUs', values);
-      console.log(response.data); // The API response
-
-      // Show success message to the user (you can use a toast or any other UI component)
+      if (isEdit) {
+        const response = await axios.put(`http://localhost:5555/api/updateCoontact`, { id,
+        ...values});
+       
+        console.log(response.data);
+        alert('Contact-Us Updated Successfully');
+      } else {
+        const response = await axios.post('http://localhost:5555/api/contactUs', values);
+        console.log(response.data);
+      }
       alert('Contact-Us Saved Successfully');
       navigate('/');
       resetForm();
@@ -40,48 +52,56 @@ const Contact = () => {
   };
 
   return (
-    <div>
-      <h1>Add Contact Page</h1>
-      <Formik
-        initialValues={initialValues}
-        validationSchema={validationSchema}
-        onSubmit={handleSubmit}
-      >
-        {({ isSubmitting }) => (
-          <Form>
-            <div>
-              <label htmlFor="fullName">Full Name:</label>
-              <Field type="text" id="fullName" name="fullName" />
-              <ErrorMessage name="fullName" component="div" />
+    <div className="contact-form">
+      <div className="contact-card">
+        <h1>{isEdit ? 'Edit Contact Page' : 'Add Contact Page'}</h1>
+        <Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={handleSubmit}>
+          {({ isSubmitting }) => (
+            <Form>
+            <div className="form-group">
+              <label htmlFor="fullName" className="label">
+                Full Name:
+              </label>
+              <Field type="text" id="fullName" name="fullName" className="form-control" />
+              <ErrorMessage name="fullName" component="div" className="error-message" />
             </div>
-            <div>
-              <label htmlFor="mobileNo">Mobile No.:</label>
-              <Field type="text" id="mobileNo" name="mobileNo" />
-              <ErrorMessage name="mobileNo" component="div" />
+            <div className="form-group">
+              <label htmlFor="mobileNo" className="label">
+                Mobile No.:
+              </label>
+              <Field type="text" id="mobileNo" name="mobileNo" className="form-control" />
+              <ErrorMessage name="mobileNo" component="div" className="error-message" />
             </div>
-            <div>
-              <label htmlFor="email">Email:</label>
-              <Field type="text" id="email" name="email" />
-              <ErrorMessage name="email" component="div" />
+            <div className="form-group">
+              <label htmlFor="email" className="label">
+                Email:
+              </label>
+              <Field type="text" id="email" name="email" className="form-control" />
+              <ErrorMessage name="email" component="div" className="error-message" />
             </div>
-            <div>
-              <label htmlFor="subject">Subject:</label>
-              <Field type="text" id="subject" name="subject" />
-              <ErrorMessage name="subject" component="div" />
+            <div className="form-group">
+              <label htmlFor="subject" className="label">
+                Subject:
+              </label>
+              <Field type="text" id="subject" name="subject" className="form-control" />
+              <ErrorMessage name="subject" component="div" className="error-message" />
             </div>
-            <div>
-              <label htmlFor="message">Message:</label>
-              <Field as="textarea" id="message" name="message" />
-              <ErrorMessage name="message" component="div" />
+            <div className="form-group">
+              <label htmlFor="message" className="label">
+                Message:
+              </label>
+              <Field as="textarea" id="message" name="message" className="form-control" />
+              <ErrorMessage name="message" component="div" className="error-message" />
             </div>
-            <div>
-              <button type="submit" disabled={isSubmitting}>
-                Submit
+            <div className="form-group submit-button">
+              <button type="submit" disabled={isSubmitting} className="btn btn-primary">
+                Update
               </button>
             </div>
           </Form>
-        )}
-      </Formik>
+          )}
+        </Formik>
+      </div>
     </div>
   );
 };

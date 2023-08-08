@@ -44,10 +44,19 @@ const TableData = () => {
     };
 
     const AddPeople = () => {
-        navigate('/blog');
+        navigate('/add-contact');
     };
 
-    const deleteFamousPeople = (id) => {
+  // Inside the TableData component
+const editContact = (contactId, contactData) => {
+    navigate(`/edit-contact/${contactId}`, { state: { contactData } });
+  };
+  
+      
+      
+    
+
+    const deleteContact = (id) => {
         confirmAlert({
           title: 'Are you sure?',
           message: 'Do you want to delete this entry?',
@@ -126,9 +135,14 @@ const TableData = () => {
                       
                       <td>
                                                     <div className='d-flex '>
-                                                        <div style={{ cursor: 'pointer' }}  ><a href="#" className="btn btn-success">Edit</a></div>
+                                                   
+<div style={{ cursor: 'pointer' }} onClick={() => editContact(contact._id, contact)}>
+  <a href="#" className="btn btn-success">Edit</a>
+</div>
 
-                                                        <div style={{ cursor: 'pointer', marginLeft: '20px' }} onClick={() => deleteFamousPeople(contact._id)}> <a href="#" className="btn btn-dark">Delete</a>
+
+
+                                                        <div style={{ cursor: 'pointer', marginLeft: '20px' }} onClick={() => deleteContact(contact._id)}> <a href="#" className="btn btn-dark">Delete</a>
                                                         </div>
 
                                                     </div>

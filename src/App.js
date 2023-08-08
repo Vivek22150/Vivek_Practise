@@ -12,6 +12,7 @@ import Shop from './components/Shop';
 import TextForm from './components/TextForm';
 import TableData from './components/tableData';
 import Contact from './components/Contact';
+import Edit from './components/Edit'
 
 
 
@@ -42,7 +43,8 @@ function App() {
  <Router>
       <Routes>
         <Route exact path="/" element={<TableData/>}> </Route>
-          <Route exact path="/blog" element={<Contact/>} />
+          <Route exact path="/add-contact" element={<Contact/>} />
+          <Route exact path="/edit-contact/:id" element={<Contact/>} />
           
        
       </Routes>
