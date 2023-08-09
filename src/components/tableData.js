@@ -132,21 +132,39 @@ const editContact = (contactId, contactData) => {
                       <td>{contact.mobileNo}</td>
                       <td>{contact.subject}</td>
                       <td>{contact.message}</td>
-                      
-                      <td>
-                                                    <div className='d-flex '>
-                                                   
-<div style={{ cursor: 'pointer' }} onClick={() => editContact(contact._id, contact)}>
-  <a href="#" className="btn btn-success">Edit</a>
-</div>
-
-
-
-                                                        <div style={{ cursor: 'pointer', marginLeft: '20px' }} onClick={() => deleteContact(contact._id)}> <a href="#" className="btn btn-dark">Delete</a>
-                                                        </div>
-
-                                                    </div>
-                                                </td>
+                     
+          <td>
+            <div className="d-flex">
+              <div className="dropdown">
+                <button
+                  className="btn btn-secondary dropdown-toggle"
+                  type="button"
+                  id={`actionDropdown_${contact._id}`}
+                  data-bs-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                >
+                  Actions
+                </button>
+                <div className="dropdown-menu" aria-labelledby={`actionDropdown_${contact._id}`}>
+                  <a
+                    className="dropdown-item"
+                   
+                    onClick={() => editContact(contact._id, contact)}
+                  >
+                    Edit
+                  </a>
+                  <a
+                    className="dropdown-item"
+                    href="#"
+                    onClick={() => deleteContact(contact._id)}
+                  >
+                    Delete
+                  </a>
+                </div>
+              </div>
+            </div>
+          </td>
                     </tr>
                   ))}
                 </tbody>
