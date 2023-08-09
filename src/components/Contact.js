@@ -29,7 +29,27 @@ const Contact = () => {
 
   const navigate = useNavigate();
 
-
+  const handleSubmit = async (values, { setSubmitting, resetForm }) => {
+    try {
+      if (isEdit) {
+        const response = await axios.put(`http://localhost:5555/api/updateCoontact`, { id,
+        ...values});
+       
+        console.log(response.data);
+        alert('Contact-Us Updated Successfully');
+      } else {
+        const response = await axios.post('http://localhost:5555/api/contactUs', values);
+        console.log(response.data);
+      }
+      alert('Contact-Us Saved Successfully');
+      navigate('/');
+      resetForm();
+    } catch (error) {
+      console.error('Error submitting form:', error);
+    } finally {
+      setSubmitting(false);
+    }
+  };
 
   return (
     <div className="contact-form">
