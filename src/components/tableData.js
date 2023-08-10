@@ -114,7 +114,8 @@ const editContact = (contactId, contactData) => {
               <table className="table table-striped gy-7 gs-7">
                 <thead>
                   <tr className="fw-bold fs-6 text-gray-800 border-bottom-2 border-gray-200">
-                    <th className="min-w-200px">Id</th>
+                
+                    <th className="min-w-200px">Image</th>
                     <th className="min-w-400px">Full Name</th>
                     <th className="min-w-100px">Email</th>
                     <th className="min-w-200px">Mobile No.</th>
@@ -125,13 +126,17 @@ const editContact = (contactId, contactData) => {
                 </thead>
                 <tbody>
                   {contactList.map((contact) => (
-                    <tr key={contact._id}>
-                      <td>{contact._id}</td>
+                    <tr >
+                  
+                      <td >
+          {contact.image && <img src={contact.image} alt="Contact Image" style={{ maxWidth: '100px' }} />}
+        </td>
                       <td>{contact.fullName}</td>
                       <td>{contact.email}</td>
                       <td>{contact.mobileNo}</td>
                       <td>{contact.subject}</td>
                       <td>{contact.message}</td>
+        
                      
           <td>
             <div className="d-flex">
@@ -139,25 +144,25 @@ const editContact = (contactId, contactData) => {
                 <button
                   className="btn btn-secondary dropdown-toggle"
                   type="button"
-                  id={`actionDropdown_${contact._id}`}
+                  id={`actionDropdown_${contact.id}`}
                   data-bs-toggle="dropdown"
                   aria-haspopup="true"
                   aria-expanded="false"
                 >
                   Actions
                 </button>
-                <div className="dropdown-menu" aria-labelledby={`actionDropdown_${contact._id}`}>
+                <div className="dropdown-menu" aria-labelledby={`actionDropdown_${contact.id}`}>
                   <a
                     className="dropdown-item"
                    
-                    onClick={() => editContact(contact._id, contact)}
+                    onClick={() => editContact(contact.id, contact)}
                   >
                     Edit
                   </a>
                   <a
                     className="dropdown-item"
                     href="#"
-                    onClick={() => deleteContact(contact._id)}
+                    onClick={() => deleteContact(contact.id)}
                   >
                     Delete
                   </a>
